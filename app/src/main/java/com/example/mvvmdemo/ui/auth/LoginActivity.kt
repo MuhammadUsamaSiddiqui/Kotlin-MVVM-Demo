@@ -1,35 +1,31 @@
 package com.example.mvvmdemo.ui.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.mvvmdemo.R
-import com.example.mvvmdemo.data.db.AppDatabase
 import com.example.mvvmdemo.data.db.entities.User
-import com.example.mvvmdemo.data.network.MyApi
-import com.example.mvvmdemo.data.network.NetworkConnectionInterceptor
-import com.example.mvvmdemo.data.repositories.UserRepository
 import com.example.mvvmdemo.databinding.ActivityLoginBinding
 import com.example.mvvmdemo.ui.home.HomeActivity
 import com.example.mvvmdemo.util.hide
 import com.example.mvvmdemo.util.show
 import com.example.mvvmdemo.util.snackbar
-import com.example.mvvmdemo.util.toast
 import kotlinx.android.synthetic.main.activity_login.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class LoginActivity : AppCompatActivity(), AuthListener {
+class LoginActivity : AppCompatActivity(), AuthListener, KodeinAware {
+
+    // Dependency Injection
+    override val kodein by kodein()
+    private val factory : AuthViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
-        val api = MyApi(networkConnectionInterceptor)
-        val db = AppDatabase(this)
-        val repository =  UserRepository(api , db)
-        val factory = AuthViewModelFactory(repository)
 
         val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this,R.layout.activity_login)
         val viewModel = ViewModelProviders.of(this, factory).get(AuthViewModel::class.java)
@@ -44,7 +40,6 @@ class LoginActivity : AppCompatActivity(), AuthListener {
                     startActivity(it)
                 }
             }
-
         })
     }
 
@@ -65,5 +60,4 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         progressbar.hide()
         root_layout.snackbar(message)
     }
-
 }

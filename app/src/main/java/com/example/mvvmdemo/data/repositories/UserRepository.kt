@@ -1,16 +1,10 @@
 package com.example.mvvmdemo.data.repositories
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.mvvmdemo.data.db.AppDatabase
+import com.example.mvvmdemo.data.db.database.AppDatabase
 import com.example.mvvmdemo.data.db.entities.User
-import com.example.mvvmdemo.data.network.MyApi
+import com.example.mvvmdemo.data.network.api.MyApi
 import com.example.mvvmdemo.data.network.SafeApiRequest
 import com.example.mvvmdemo.data.network.responses.AuthResponse
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class UserRepository (private val api : MyApi, private val db : AppDatabase) : SafeApiRequest() {
 
@@ -42,6 +36,12 @@ class UserRepository (private val api : MyApi, private val db : AppDatabase) : S
     suspend fun userLogin (email:String , password:String): AuthResponse {
         return apiRequest {
            api.userLogin(email, password)
+        }
+    }
+
+    suspend fun userSignup (name:String, email:String, password:String): AuthResponse {
+        return apiRequest {
+            api.userSignup(name, email, password)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.mvvmdemo.data.network
+package com.example.mvvmdemo.data.network.interceptor
 
 import android.content.Context
 import android.net.ConnectivityManager

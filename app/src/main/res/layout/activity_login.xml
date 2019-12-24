@@ -2,7 +2,6 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-
         <variable
             name="viewmodel"
             type="com.example.mvvmdemo.ui.auth.AuthViewModel" />
@@ -104,6 +103,7 @@
             </LinearLayout>
 
             <TextView
+                android:onClick="@{viewmodel::goToSignup}"
                 android:id="@+id/textViewSignup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

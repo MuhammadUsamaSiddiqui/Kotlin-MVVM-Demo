@@ -10,4 +10,9 @@ object Coroutines {  //here object is equivalent to static in java
         CoroutineScope(Dispatchers.Main).launch {
             work()
         }
+
+    fun io (work : suspend(() -> Unit)) =    // This function return a job
+        CoroutineScope(Dispatchers.IO).launch {
+            work()
+        }
 }
