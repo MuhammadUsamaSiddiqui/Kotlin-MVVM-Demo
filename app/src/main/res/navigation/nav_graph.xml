@@ -15,4 +15,5 @@
         android:name="com.example.mvvmdemo.ui.home.quotes.QuotesFragment"
         android:label="Quotes"
         tools:layout="@layout/quotes_fragment" />
+
 </navigation>

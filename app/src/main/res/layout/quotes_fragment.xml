@@ -5,9 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.quotes.QuotesFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_view"
+    tools:listitem="@layout/item_quote"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"/>
 
 </FrameLayout>
